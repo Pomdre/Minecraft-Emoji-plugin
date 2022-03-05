@@ -1,7 +1,0 @@
-{
-    "java.dependency.packagePresentation": "hierarchical",
-    "java.project.referencedLibraries": [
-        "lib/**/*.jar",
-        "c:\\Users\\Sondre Batalden\\Desktop\\Bygg Spigot\\spigot-1.17.1.jar"
-    ]
-}
