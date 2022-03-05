@@ -1,0 +1,318 @@
+Version-1.0
+%smiley% = ☻
+%heart% = ❤
+%peace% = ☮
+%chess% = ♖
+%music% = ♪
+%swords% = ⚔️
+
+Version-1.2
+%smiley% = ☻
+%heart% = ❤
+%peace% = ☮
+%chess% = ♖
+%music% = ♪
+%swords% = ⚔️
+
+Version-1.3
+%copyright% = ©
+%anchor% = ⚓
+%skull% = ☠
+%umbrella% = ☂
+%diamonds% = ♦
+%snowflake% = ❄
+%snowman% = ☃
+%checkmark% = ✔
+%crossmark% = ✖
+%airplane% = ✈
+%coffee% = ☕
+%star% = ✰
+%email% = ✉
+%scales% = ⚖
+
+Version-1.4
+%sad% = ☹
+%hammer-and-sickle% = ☭
+%hammer-and-pick% = ⚒
+%radioactive% = ☢
+%queen% = ♕
+
+Version-2.1
+%flag%
+%florette%
+%cloud%
+%woman%
+%man%
+
+Version-3.0
+%sun% 
+%comet%
+%lightning%
+%thunderstorm% 
+%telephone% 
+%saltire% 
+%shamrock%
+%left_pointing% 
+%right_pointing% 
+%up_pointing%
+%down_pointing%
+%biohazard%
+%caduceus%
+%ankh%
+%orthodox_cross%
+%chi_rho%
+%cross_of_lorraine% 
+%cross_of_jerusalem% 
+%star_and_crescent%
+%farsi_symbol%
+
+Version-4.0
+%black_sun_with_rays% = ☀
+%cloud% = ☁
+%umbrella% = ☂
+%snowman% = ☃
+%comet% = ☄
+%black_star% = ★
+%white_star% = ☆
+%lightning% = ☇
+%thunderstorm% = ☈
+%sun% = ☉
+%ascending_node% = ☊
+%descending_node% = ☋
+%conjunction% = ☌
+%opposition% = ☍
+%black_telephone% = ☎
+%white_telephone% = ☏
+%ballot_box% = ☐
+%ballot_box_with_check% = ☑
+%ballot_box_with_x% = ☒
+%saltire% = ☓
+%reversed_rotated_floral_heart_bullet% = ☙
+%black_left_pointing_index% = ☚
+%black_right_pointing_index% = ☛
+%white_left_pointing_index% = ☜
+%white_up_pointing_index% = ☝
+%white_right_pointing_index% = ☞
+%white_down_pointing_index% = ☟
+%skull_and_crossbones% = ☠
+%caution_sign% = ☡
+%radioactive_sign% = ☢
+%biohazard_sign% = ☣
+%caduceus% = ☤
+%ankh% = ☥
+%orthodox_cross% = ☦
+%chi_rho% = ☧
+%cross_of_lorraine% = ☨
+%cross_of_jerusalem% = ☩
+%star_and_crescent% = ☪
+%farsi_symbol% = ☫
+%adi_shakti% = ☬
+%hammer_and_sickle% = ☭
+%peace_symbol% = ☮
+%yin_yang% = ☯
+%trigram_for_heaven% = ☰
+%trigram_for_lake% = ☱
+%trigram_for_fire% = ☲
+%trigram_for_thunder% = ☳
+%trigram_for_wind% = ☴
+%trigram_for_water% = ☵
+%trigram_for_mountain% = ☶
+%trigram_for_earth% = ☷
+%wheel_of_dharma% = ☸
+%white_frowning_face% = ☹
+%white_smiling_face% = ☺
+%black_smiling_face% = ☻
+%white_sun_with_rays% = ☼
+%first_quarter_moon% = ☽
+%last_quarter_moon% = ☾
+%mercury% = ☿
+%female_sign% = ♀
+%earth% = ♁
+%male_sign% = ♂
+%jupiter% = ♃
+%saturn% = ♄
+%uranus% = ♅
+%neptune% = ♆
+%pluto% = ♇
+%aries% = ♈
+%taurus% = ♉
+%gemini% = ♊
+%cancer% = ♋
+%leo% = ♌
+%virgo% = ♍
+%libra% = ♎
+%scorpius% = ♏
+%sagittarius% = ♐
+%capricorn% = ♑
+%aquarius% = ♒
+%pisces% = ♓
+%white_chess_king% = ♔
+%white_chess_queen% = ♕
+%white_chess_rook% = ♖
+%white_chess_bishop% = ♗
+%white_chess_knight% = ♘
+%white_chess_pawn% = ♙
+%black_chess_king% = ♚
+%black_chess_queen% = ♛
+%black_chess_rook% = ♜
+%black_chess_bishop% = ♝
+%black_chess_knight% = ♞
+%black_chess_pawn% = ♟
+%black_spade_suit% = ♠
+%white_heart_suit% = ♡
+%white_diamond_suit% = ♢
+%black_club_suit% = ♣
+%white_spade_suit% = ♤
+%black_heart_suit% = ♥
+%black_diamond_suit% = ♦
+%white_club_suit% = ♧
+%hot_springs% = ♨
+%quarter_note% = ♩
+%eighth_note% = ♪
+%beamed_eighth_notes% = ♫
+%beamed_sixteenth_notes% = ♬
+%music_flat_sign% = ♭
+%music_natural_sign% = ♮
+%music_sharp_sign% = ♯
+%west_syriac_cross% = ♰
+%east_syriac_cross% = ♱
+
+----All----
+%black_sun_with_rays% = ☀
+%cloud% = ☁
+%umbrella% = ☂
+%snowman% = ☃
+%comet% = ☄
+%black_star% = ★
+%white_star% = ☆
+%lightning% = ☇
+%thunderstorm% = ☈
+%sun% = ☉
+%ascending_node% = ☊
+%descending_node% = ☋
+%conjunction% = ☌
+%opposition% = ☍
+%black_telephone% = ☎
+%white_telephone% = ☏
+%ballot_box% = ☐
+%ballot_box_with_check% = ☑
+%ballot_box_with_x% = ☒
+%saltire% = ☓
+%reversed_rotated_floral_heart_bullet% = ☙
+%black_left_pointing_index% = ☚
+%black_right_pointing_index% = ☛
+%white_left_pointing_index% = ☜
+%white_up_pointing_index% = ☝
+%white_right_pointing_index% = ☞
+%white_down_pointing_index% = ☟
+%skull_and_crossbones% = ☠
+%caution_sign% = ☡
+%radioactive_sign% = ☢
+%biohazard_sign% = ☣
+%caduceus% = ☤
+%ankh% = ☥
+%orthodox_cross% = ☦
+%chi_rho% = ☧
+%cross_of_lorraine% = ☨
+%cross_of_jerusalem% = ☩
+%star_and_crescent% = ☪
+%farsi_symbol% = ☫
+%adi_shakti% = ☬
+%hammer_and_sickle% = ☭
+%peace_symbol% = ☮
+%yin_yang% = ☯
+%trigram_for_heaven% = ☰
+%trigram_for_lake% = ☱
+%trigram_for_fire% = ☲
+%trigram_for_thunder% = ☳
+%trigram_for_wind% = ☴
+%trigram_for_water% = ☵
+%trigram_for_mountain% = ☶
+%trigram_for_earth% = ☷
+%wheel_of_dharma% = ☸
+%white_frowning_face% = ☹
+%white_smiling_face% = ☺
+%black_smiling_face% = ☻
+%white_sun_with_rays% = ☼
+%first_quarter_moon% = ☽
+%last_quarter_moon% = ☾
+%mercury% = ☿
+%female_sign% = ♀
+%earth% = ♁
+%male_sign% = ♂
+%jupiter% = ♃
+%saturn% = ♄
+%uranus% = ♅
+%neptune% = ♆
+%pluto% = ♇
+%aries% = ♈
+%taurus% = ♉
+%gemini% = ♊
+%cancer% = ♋
+%leo% = ♌
+%virgo% = ♍
+%libra% = ♎
+%scorpius% = ♏
+%sagittarius% = ♐
+%capricorn% = ♑
+%aquarius% = ♒
+%pisces% = ♓
+%white_chess_king% = ♔
+%white_chess_queen% = ♕
+%white_chess_rook% = ♖
+%white_chess_bishop% = ♗
+%white_chess_knight% = ♘
+%white_chess_pawn% = ♙
+%black_chess_king% = ♚
+%black_chess_queen% = ♛
+%black_chess_rook% = ♜
+%black_chess_bishop% = ♝
+%black_chess_knight% = ♞
+%black_chess_pawn% = ♟
+%black_spade_suit% = ♠
+%white_heart_suit% = ♡
+%white_diamond_suit% = ♢
+%black_club_suit% = ♣
+%white_spade_suit% = ♤
+%black_heart_suit% = ♥
+%black_diamond_suit% = ♦
+%white_club_suit% = ♧
+%hot_springs% = ♨
+%quarter_note% = ♩
+%eighth_note% = ♪
+%beamed_eighth_notes% = ♫
+%beamed_sixteenth_notes% = ♬
+%music_flat_sign% = ♭
+%music_natural_sign% = ♮
+%music_sharp_sign% = ♯
+%west_syriac_cross% = ♰
+%east_syriac_cross% = ♱
+
+
+----Shortcuts----
+:) = %white_smiling_face%
+:( = %white_frowning_face%
+<3 = %black_heart_suit%
+
+----Show off----
+%cloud% = ☁
+%umbrella% = ☂
+%snowman% = ☃
+%comet% = ☄
+%black_club_suit% = ♣
+%black_heart_suit% = ♥
+%pisces% = ♓
+%white_chess_king% = ♔
+%white_chess_queen% = ♕
+%white_chess_rook% = ♖
+%white_chess_bishop% = ♗
+%white_chess_knight% = ♘
+%white_chess_pawn% = ♙
+%black_chess_king% = ♚
+%black_chess_queen% = ♛
+%black_chess_rook% = ♜
+%black_chess_bishop% = ♝
+%black_chess_knight% = ♞
+%black_chess_pawn% = ♟
+%black_spade_suit% = ♠
+%beamed_eighth_notes% = ♫

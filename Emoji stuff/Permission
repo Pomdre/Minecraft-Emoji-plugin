@@ -1,0 +1,19 @@
+----------Version-1.1----------
+        Permission:
+emoji.*         | to use /emoji list
+----------Version-2.0----------
+          Permission:
+emoji.list      | to use /emoji list
+emoji.chat      | to use macro in chat
+emoji.shortcuts | to use shortcuts in chat
+emoji.sign      | to use macro on sign
+----------Version-2.1----------
+emoji.help      | to use /emoji help
+
+----------In use----------
+          Permission:
+emoji.list      | to use /emoji list
+emoji.chat      | to use macro in chat
+emoji.shortcuts | to use shortcuts in chat
+emoji.sign      | to use macro on sign
+emoji.help      | to use /emoji help
