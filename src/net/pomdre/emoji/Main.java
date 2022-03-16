@@ -2,9 +2,19 @@ package net.pomdre.emoji;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.bukkit.Bukkit;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -17,9 +27,14 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.google.common.collect.Lists;
+import org.bstats.bukkit.Metrics;
 
 public class Main extends JavaPlugin implements Listener {
 	FileConfiguration config = this.getConfig();
+  ConcurrentHashMap<String, String> emojiMappings = new ConcurrentHashMap<String, String>(); //https://www.spigotmc.org/threads/concurrentmodificationexception.430268/#post-3759420
+  String delimiter = ",", mappingFilename = "shortcodes.txt";
+  File mappingFile = new File(getDataFolder() + File.separator + mappingFilename);
+  BufferedReader br = null;
 	
 	@Override
     public void onEnable() {
@@ -31,8 +46,8 @@ public class Main extends JavaPlugin implements Listener {
         
         //bStats
         if(getConfig().getBoolean("metrics") == true){
-        int pluginId = 61432; // <-- Replace with the id of your plugin!
-        Metrics metrics = new Metrics(this, pluginId);
+          int pluginId = 61432; // <-- Replace with the id of your plugin!
+          Metrics metrics = new Metrics(this, pluginId);
         }
         
         //Update
@@ -46,6 +61,39 @@ public class Main extends JavaPlugin implements Listener {
             }
         });
 
+        logger.info("Loading shortcodes into memory...");
+
+        if (!mappingFile.exists())
+          saveResource(mappingFilename, false); //https://bukkit.org/threads/copy-file-from-resources.102015/#post-1345427
+        emojiMappings.clear();
+
+        try { //https://www.geeksforgeeks.org/reading-text-file-into-java-hashmap/
+          br = new BufferedReader(new FileReader(mappingFile));
+          String line = null;
+
+          while ((line = br.readLine()) != null) {
+              String[] lineRead = line.split(delimiter);
+              if (!lineRead[0].equals("") && !lineRead[1].equals(""))
+                emojiMappings.put(lineRead[0], lineRead[1]);
+          }
+          logger.info("Shortcodes successfully loaded!");
+        }
+        catch (Exception e) { //https://stackoverflow.com/a/6823021
+          logger.severe("Failed to parse shortcodes mapping!");
+            
+          StringWriter writer = new StringWriter();
+          PrintWriter printWriter = new PrintWriter(writer);
+          e.printStackTrace(printWriter);
+          printWriter.flush();
+          getLogger().log(Level.SEVERE, writer.toString());
+        } finally {
+            if (br != null) {
+                try {
+                    br.close();
+                }
+                catch (Exception e) {};
+            }
+        }
     }
 	public void onDisable() {
 		
@@ -179,122 +227,28 @@ public class Main extends JavaPlugin implements Listener {
     	if(getConfig().getBoolean("chat") == true){
      String msg = event.getMessage();
  
-     //Miscellaneous Symbols
-     msg = msg.replace(surrounding + "black_sun_with_rays" + surrounding, black_sun_with_rays);
-     msg = msg.replace(surrounding + "cloud" + surrounding, cloud);
-     msg = msg.replace(surrounding + "umbrella" + surrounding, umbrella);
-     msg = msg.replace(surrounding + "snowman" + surrounding, snowman);
-     msg = msg.replace(surrounding + "comet" + surrounding, comet);
-     msg = msg.replace(surrounding + "black_star" + surrounding, black_star);
-     msg = msg.replace(surrounding + "white_star" + surrounding, white_star);
-     msg = msg.replace(surrounding + "lightning" + surrounding, lightning);
-     msg = msg.replace(surrounding + "thunderstorm" + surrounding, thunderstorm);
-     msg = msg.replace(surrounding + "sun" + surrounding, sun);
-     msg = msg.replace(surrounding + "ascending_node" + surrounding, ascending_node);
-     msg = msg.replace(surrounding + "descending_node" + surrounding, descending_node);
-     msg = msg.replace(surrounding + "conjunction" + surrounding, conjunction);
-     msg = msg.replace(surrounding + "opposition" + surrounding, opposition);
-     msg = msg.replace(surrounding + "black_telephone" + surrounding, black_telephone);
-     msg = msg.replace(surrounding + "white_telephone" + surrounding, white_telephone);
-     msg = msg.replace(surrounding + "ballot_box" + surrounding, ballot_box);
-     msg = msg.replace(surrounding + "ballot_box_with_check" + surrounding, ballot_box_with_check);
-     msg = msg.replace(surrounding + "ballot_box_with_x" + surrounding, ballot_box_with_x);
-     msg = msg.replace(surrounding + "saltire" + surrounding, saltire);
-     msg = msg.replace(surrounding + "reversed_rotated_floral_heart_bullet" + surrounding, reversed_rotated_floral_heart_bullet);
-     msg = msg.replace(surrounding + "black_left_pointing_index" + surrounding, black_left_pointing_index);
-     msg = msg.replace(surrounding + "black_right_pointing_index" + surrounding, black_right_pointing_index);
-     msg = msg.replace(surrounding + "white_left_pointing_index" + surrounding, white_left_pointing_index);
-     msg = msg.replace(surrounding + "white_up_pointing_index" + surrounding, white_up_pointing_index);
-     msg = msg.replace(surrounding + "white_right_pointing_index" + surrounding, white_right_pointing_index);
-     msg = msg.replace(surrounding + "white_down_pointing_index" + surrounding, white_down_pointing_index);
-     msg = msg.replace(surrounding + "skull_and_crossbones" + surrounding, skull_and_crossbones);
-     msg = msg.replace(surrounding + "caution_sign" + surrounding, caution_sign);
-     msg = msg.replace(surrounding + "radioactive_sign" + surrounding, radioactive_sign);
-     msg = msg.replace(surrounding + "biohazard_sign" + surrounding, biohazard_sign);
-     msg = msg.replace(surrounding + "caduceus" + surrounding, caduceus);
-     msg = msg.replace(surrounding + "ankh" + surrounding, ankh);
-     msg = msg.replace(surrounding + "orthodox_cross" + surrounding, orthodox_cross);
-     msg = msg.replace(surrounding + "chi_rho" + surrounding, chi_rho);
-     msg = msg.replace(surrounding + "cross_of_lorraine" + surrounding, cross_of_lorraine);
-     msg = msg.replace(surrounding + "cross_of_jerusalem" + surrounding, cross_of_jerusalem);
-     msg = msg.replace(surrounding + "star_and_crescent" + surrounding, star_and_crescent);
-     msg = msg.replace(surrounding + "farsi_symbol" + surrounding, farsi_symbol);
-     msg = msg.replace(surrounding + "adi_shakti" + surrounding, adi_shakti);
-     msg = msg.replace(surrounding + "hammer_and_sickle" + surrounding, hammer_and_sickle);
-     msg = msg.replace(surrounding + "peace_symbol" + surrounding, peace_symbol);
-     msg = msg.replace(surrounding + "yin_yang" + surrounding, yin_yang);
-     msg = msg.replace(surrounding + "trigram_for_heaven" + surrounding, trigram_for_heaven);
-     msg = msg.replace(surrounding + "trigram_for_lake" + surrounding, trigram_for_lake);
-     msg = msg.replace(surrounding + "trigram_for_fire" + surrounding, trigram_for_fire);
-     msg = msg.replace(surrounding + "trigram_for_thunder" + surrounding, trigram_for_thunder);
-     msg = msg.replace(surrounding + "trigram_for_wind" + surrounding, trigram_for_wind);
-     msg = msg.replace(surrounding + "trigram_for_water" + surrounding, trigram_for_water);
-     msg = msg.replace(surrounding + "trigram_for_mountain" + surrounding, trigram_for_mountain);
-     msg = msg.replace(surrounding + "trigram_for_earth" + surrounding, trigram_for_earth);
-     msg = msg.replace(surrounding + "wheel_of_dharma" + surrounding, wheel_of_dharma);
-     msg = msg.replace(surrounding + "white_frowning_face" + surrounding, white_frowning_face);
-     msg = msg.replace(surrounding + "white_smiling_face" + surrounding, white_smiling_face);
-     msg = msg.replace(surrounding + "black_smiling_face" + surrounding, black_smiling_face);
-     msg = msg.replace(surrounding + "white_sun_with_rays" + surrounding, white_sun_with_rays);
-     msg = msg.replace(surrounding + "first_quarter_moon" + surrounding, first_quarter_moon);
-     msg = msg.replace(surrounding + "last_quarter_moon" + surrounding, last_quarter_moon);
-     msg = msg.replace(surrounding + "mercury" + surrounding, mercury);
-     msg = msg.replace(surrounding + "female_sign" + surrounding, female_sign);
-     msg = msg.replace(surrounding + "earth" + surrounding, earth);
-     msg = msg.replace(surrounding + "male_sign" + surrounding, male_sign);
-     msg = msg.replace(surrounding + "jupiter" + surrounding, jupiter);
-     msg = msg.replace(surrounding + "saturn" + surrounding, saturn);
-     msg = msg.replace(surrounding + "uranus" + surrounding, uranus);
-     msg = msg.replace(surrounding + "neptune" + surrounding, neptune);
-     msg = msg.replace(surrounding + "pluto" + surrounding, pluto);
-     msg = msg.replace(surrounding + "aries" + surrounding, aries);
-     msg = msg.replace(surrounding + "taurus" + surrounding, taurus);
-     msg = msg.replace(surrounding + "gemini" + surrounding, gemini);
-     msg = msg.replace(surrounding + "cancer" + surrounding, cancer);
-     msg = msg.replace(surrounding + "leo" + surrounding, leo);
-     msg = msg.replace(surrounding + "virgo" + surrounding, virgo);
-     msg = msg.replace(surrounding + "libra" + surrounding, libra);
-     msg = msg.replace(surrounding + "scorpius" + surrounding, scorpius);
-     msg = msg.replace(surrounding + "sagittarius" + surrounding, sagittarius);
-     msg = msg.replace(surrounding + "capricorn" + surrounding, capricorn);
-     msg = msg.replace(surrounding + "aquarius" + surrounding, aquarius);
-     msg = msg.replace(surrounding + "pisces" + surrounding, pisces);
-     msg = msg.replace(surrounding + "white_chess_king" + surrounding, white_chess_king);
-     msg = msg.replace(surrounding + "white_chess_queen" + surrounding, white_chess_queen);
-     msg = msg.replace(surrounding + "white_chess_rook" + surrounding, white_chess_rook);
-     msg = msg.replace(surrounding + "white_chess_bishop" + surrounding, white_chess_bishop);
-     msg = msg.replace(surrounding + "white_chess_knight" + surrounding, white_chess_knight);
-     msg = msg.replace(surrounding + "white_chess_pawn" + surrounding, white_chess_pawn);
-     msg = msg.replace(surrounding + "black_chess_king" + surrounding, black_chess_king);
-     msg = msg.replace(surrounding + "black_chess_queen" + surrounding, black_chess_queen);
-     msg = msg.replace(surrounding + "black_chess_rook" + surrounding, black_chess_rook);
-     msg = msg.replace(surrounding + "black_chess_bishop" + surrounding, black_chess_bishop);
-     msg = msg.replace(surrounding + "black_chess_knight" + surrounding, black_chess_knight);
-     msg = msg.replace(surrounding + "black_chess_pawn" + surrounding, black_chess_pawn);
-     msg = msg.replace(surrounding + "black_spade_suit" + surrounding, black_spade_suit);
-     msg = msg.replace(surrounding + "white_heart_suit" + surrounding, white_heart_suit);
-     msg = msg.replace(surrounding + "white_diamond_suit" + surrounding, white_diamond_suit);
-     msg = msg.replace(surrounding + "black_club_suit" + surrounding, black_club_suit);
-     msg = msg.replace(surrounding + "white_spade_suit" + surrounding, white_spade_suit);
-     msg = msg.replace(surrounding + "black_heart_suit" + surrounding, black_heart_suit);
-     msg = msg.replace(surrounding + "black_diamond_suit" + surrounding, black_diamond_suit);
-     msg = msg.replace(surrounding + "white_club_suit" + surrounding, white_club_suit);
-     msg = msg.replace(surrounding + "hot_springs" + surrounding, hot_springs);
-     msg = msg.replace(surrounding + "quarter_note" + surrounding, quarter_note);
-     msg = msg.replace(surrounding + "eighth_note" + surrounding, eighth_note);
-     msg = msg.replace(surrounding + "beamed_eighth_notes" + surrounding, beamed_eighth_notes);
-     msg = msg.replace(surrounding + "beamed_sixteenth_notes" + surrounding, beamed_sixteenth_notes);
-     msg = msg.replace(surrounding + "music_flat_sign" + surrounding, music_flat_sign);
-     msg = msg.replace(surrounding + "music_natural_sign" + surrounding, music_natural_sign);
-     msg = msg.replace(surrounding + "music_sharp_sign" + surrounding, music_sharp_sign);
-     msg = msg.replace(surrounding + "west_syriac_cross" + surrounding, west_syriac_cross);
-     msg = msg.replace(surrounding + "east_syriac_cross" + surrounding, east_syriac_cross);
+        //Miscellaneous Symbols
+     // Regex Preparation, https://stackoverflow.com/a/1454936 and https://stackoverflow.com/a/5887729
+     String regex_string = "(?<=\\" + surrounding.trim() + ")[a-zA-Z0-9-_]+(?=\\"+ surrounding.trim() + ")";
+     Pattern msg_pattern = Pattern.compile(regex_string); //https://stackoverflow.com/a/237068
+     Matcher msg_matcher = msg_pattern.matcher(msg);
+     String shortcode_string = "", emoji_string = "";
+
+     // Check if msg contains pattern for shortcode
+    while (msg_matcher.find()) {
+       // If pattern matches, get emoji for shortcode
+       shortcode_string = msg_matcher.group(0).toLowerCase(Locale.ENGLISH); //https://stackoverflow.com/a/11063161
+       emoji_string = emojiMappings.get(shortcode_string);
+
+       if (emoji_string != null)
+        msg = msg.replace(surrounding + shortcode_string + surrounding + "", emoji_string + "");
+     }
+
      //Extra
      msg = msg.replace("%white_draughts_man%", white_draughts_man);
      msg = msg.replace("%white_draughts_king%", white_draughts_king);
      msg = msg.replace("%black_draughts_man%", black_draughts_man);
      msg = msg.replace("%black_draughts_king%", black_draughts_king);
-
      
      event.setMessage(msg);
      
@@ -647,6 +601,4 @@ public class Main extends JavaPlugin implements Listener {
         
         return null;
       }
-      
-    
 }
