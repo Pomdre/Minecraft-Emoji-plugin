@@ -8,7 +8,8 @@ import java.util.Scanner;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 
-import io.netty.util.internal.shaded.org.jctools.queues.MessagePassingQueue.Consumer;
+//import io.netty.util.internal.shaded.org.jctools.queues.MessagePassingQueue.Consumer;
+import org.jctools.queues.MessagePassingQueue.Consumer; //https://www.baeldung.com/java-concurrency-jc-tools
 
 public class UpdateChecker {
     private Plugin plugin;
@@ -31,3 +32,4 @@ public class UpdateChecker {
         });
     }
 }
+
