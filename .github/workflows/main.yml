@@ -1,6 +1,6 @@
 # Build plugin with Maven
 # https://www.spigotmc.org/threads/github-actions-build-jar-with-maven.425246/#post-3738223
-name: Java CI with Maven
+name: Java (Spigot) CI with Maven
 
 # Controls when the workflow will run
 on:
@@ -43,3 +43,4 @@ jobs:
           path: |
             target/*.jar
             !target/original-*.jar
+            !target/*-shaded.jar
