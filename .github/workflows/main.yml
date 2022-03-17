@@ -8,7 +8,7 @@ on:
   push:
     branches: [ master, rewrite ]
   pull_request:
-    branches: [ master, rewrite ]
+    branches: [ master ]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -34,9 +34,12 @@ jobs:
 
       # Build and package the plugin with Maven
       - name: Build with Maven
-        run: mvn clean package
+        run: mvn clean package --file pom.xml
+      # https://stackoverflow.com/q/65743472
       # https://github.com/marketplace/actions/upload-a-build-artifact
       - uses: actions/upload-artifact@v3.0.0
         with:
           name: artifact
-          path: target/
+          path: |
+            target/*.jar
+            !target/original-*.jar
