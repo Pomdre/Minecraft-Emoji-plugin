@@ -283,7 +283,7 @@ public class Main extends JavaPlugin implements Listener {
       private void loadShortcodes() {
         logger.info("Loading shortcodes into memory...");
 
-          if (!mappingFile.exists())
+          if (!mappingFile.exists()) //WARNING: The below line may or may not work in the original project's project structure
             saveResource(mappingFilename, false); //https://bukkit.org/threads/copy-file-from-resources.102015/#post-1345427
           emojiMappings.clear();
           mappingCount = 0;
@@ -337,7 +337,7 @@ public class Main extends JavaPlugin implements Listener {
 
         //Miscellaneous Symbols
         //Note: This hasn't received a proper rewrite like the others to help maintain the "backward compatibility"
-        
+        //===============================Comment out from here if needed================================
         lines.add(surrounding + "black_sun_with_rays" + surrounding + " = " + emojiMappings.get("black_sun_with_rays") + "\n");
         lines.add(surrounding + "cloud" + surrounding + " = " + emojiMappings.get("cloud") + "\n");
         lines.add(surrounding + "umbrella" + surrounding + " = " + emojiMappings.get("umbrella") + "\n");
@@ -447,7 +447,7 @@ public class Main extends JavaPlugin implements Listener {
         lines.add(surrounding + "music_sharp_sign" + surrounding + " = " + emojiMappings.get("music_sharp_sign") + "\n");
         lines.add(surrounding + "west_syriac_cross" + surrounding + " = " + emojiMappings.get("west_syriac_cross") + "\n");
         lines.add(surrounding + "east_syriac_cross" + surrounding + " = " + emojiMappings.get("east_syriac_cross") + "\n");
-        
+        //==============================Comment out to here if needed===================================
         // However, should Pomdre want to make this plugin truly dynamic, the above would just need to be
         // removed, and the below three lines uncommented. Everything else is otherwise dynamic except
         // for the "extras" which have been carefully left as-is.
