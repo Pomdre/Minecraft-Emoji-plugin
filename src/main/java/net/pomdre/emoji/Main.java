@@ -77,6 +77,7 @@ public class Main extends JavaPlugin implements Listener {
 
     //Regex Preparation, https://stackoverflow.com/a/1454936 and https://stackoverflow.com/a/5887729
     String regex_string = "(?<=\\" + surrounding.trim() + ")[a-zA-Z0-9-_]+(?=\\"+ surrounding.trim() + ")";  
+    Pattern regex_pattern = Pattern.compile(regex_string); //https://stackoverflow.com/a/237068
 	
     //Hent config og emoji kode
 
@@ -96,20 +97,7 @@ public class Main extends JavaPlugin implements Listener {
           String msg = event.getMessage();
  
           //Miscellaneous Symbols
-          // Regex Preparation, https://stackoverflow.com/a/1454936 and https://stackoverflow.com/a/5887729
-          Pattern msg_pattern = Pattern.compile(regex_string); //https://stackoverflow.com/a/237068
-          Matcher msg_matcher = msg_pattern.matcher(msg);
-          String shortcode_string = "", emoji_string = "";
-
-          // Check if msg contains pattern for shortcode
-          while (msg_matcher.find()) {
-            // If pattern matches, get emoji for shortcode
-            shortcode_string = msg_matcher.group(0).toLowerCase(Locale.ENGLISH); //https://stackoverflow.com/a/11063161
-            emoji_string = emojiMappings.get(shortcode_string);
-
-            if (emoji_string != null)
-              msg = msg.replace(surrounding + shortcode_string + surrounding, emoji_string);
-          }
+          msg = mapEmojis(msg);
 
           //Extra
           msg = msg.replace("%white_draughts_man%", white_draughts_man);
@@ -146,38 +134,18 @@ public class Main extends JavaPlugin implements Listener {
         event.setMessage(msg);
       }
     }
-   
-     
-    
+
     //sign
     @EventHandler
     public void onSignChange(SignChangeEvent e) {
       Player p = e.getPlayer();
-
-      // Regex Preparation, https://stackoverflow.com/a/1454936 and https://stackoverflow.com/a/5887729
-      Pattern sign_pattern = Pattern.compile(regex_string); //https://stackoverflow.com/a/237068
-      Matcher sign_matcher = null;
-      String shortcode_string = "", emoji_string = "";
 
       if(p.hasPermission("emoji.sign")) {
         if(getConfig().getBoolean("sign") == true){
           for (int i = 0; i < 4; i++) {
         	
         	  //Miscellaneous Symbols
-          
-            sign_matcher = sign_pattern.matcher(e.getLine(i));
-            // Check if msg contains pattern for shortcode
-            while (sign_matcher.find()) {
-              // If pattern matches, get emoji for shortcode
-              shortcode_string = sign_matcher.group(0).toLowerCase(Locale.ENGLISH); //https://stackoverflow.com/a/11063161
-              emoji_string = emojiMappings.get(shortcode_string);
-
-              if (emoji_string != null) {
-                if (e.getLine(i).equalsIgnoreCase(surrounding + shortcode_string + surrounding))
-                  e.setLine(i, emoji_string);
-              } 
-            }
-
+            e.setLine(i,mapEmojis(e.getLine(i)));
             //Extra
             if(e.getLine(i).equalsIgnoreCase("%white_draughts_man%")) { e.setLine(i, white_draughts_man); }
             if(e.getLine(i).equalsIgnoreCase("%white_draughts_king%")) { e.setLine(i, white_draughts_king); }
@@ -257,6 +225,8 @@ public class Main extends JavaPlugin implements Listener {
                 maxpage = 109/getConfig().getInt("pagesperpage")+1;
                 surrounding = getConfig().getString("surrounding");
 
+                regex_string = "(?<=\\" + surrounding.trim() + ")[a-zA-Z0-9-_]+(?=\\"+ surrounding.trim() + ")";
+                regex_pattern = Pattern.compile(regex_string);
                 loadShortcodes();
 
                 //Extra
@@ -278,6 +248,25 @@ public class Main extends JavaPlugin implements Listener {
         }
         return false;
       }
+
+
+    private String mapEmojis(String input_string) {
+        // Regex Preparation, https://stackoverflow.com/a/1454936 and https://stackoverflow.com/a/5887729
+        Matcher emoji_matcher = regex_pattern.matcher(input_string);
+        String shortcode_string = "", emoji_string = "";
+
+        // Check if msg contains pattern for shortcode
+        while (emoji_matcher.find()) {
+          // If pattern matches, get emoji for shortcode
+          shortcode_string = emoji_matcher.group(0).toLowerCase(Locale.ENGLISH); //https://stackoverflow.com/a/11063161
+          emoji_string = emojiMappings.get(shortcode_string);
+
+          if (emoji_string != null)
+            input_string = input_string.replace(surrounding + shortcode_string + surrounding, emoji_string);
+        }
+
+        return input_string;
+    }
 
     private void loadShortcodes() {
       logger.info("Loading shortcodes into memory...");
