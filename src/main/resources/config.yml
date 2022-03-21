@@ -272,9 +272,3 @@ suffix_music_natural_sign: '&r'
 suffix_music_sharp_sign: '&r'
 suffix_west_syriac_cross: '&r'
 suffix_east_syriac_cross: '&r'
-#
-# Suffix Extra
-suffix_white_draughts_man: '&r'
-suffix_white_draughts_king: '&r'
-suffix_black_draughts_man: '&r'
-suffix_black_draughts_king: '&r'

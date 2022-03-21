@@ -70,7 +70,7 @@ public class Main extends JavaPlugin implements Listener {
 	  public void onDisable() {
 		
 	  }
-    //ekstra
+
     String surrounding = getConfig().getString("surrounding");
     int maxpage = 109/getConfig().getInt("pagesperpage")+1;
   
@@ -78,8 +78,6 @@ public class Main extends JavaPlugin implements Listener {
     //Regex Preparation, https://stackoverflow.com/a/1454936 and https://stackoverflow.com/a/5887729
     String regex_string = "(?<=\\" + surrounding.trim() + ")[a-zA-Z0-9-_]+(?=\\"+ surrounding.trim() + ")";  
     Pattern regex_pattern = Pattern.compile(regex_string); //https://stackoverflow.com/a/237068
-	
-    //Hent config og emoji kode
 
     //Extra
     String white_draughts_man= ChatColor.translateAlternateColorCodes('&', getConfig().getString("white_draughts_man")) + ("\u26C0") + ChatColor.translateAlternateColorCodes('&', getConfig().getString("suffix_white_draughts_man"));
@@ -98,13 +96,6 @@ public class Main extends JavaPlugin implements Listener {
  
           //Miscellaneous Symbols
           msg = mapEmojis(msg);
-
-          //Extra
-          msg = msg.replace("%white_draughts_man%", white_draughts_man);
-          msg = msg.replace("%white_draughts_king%", white_draughts_king);
-          msg = msg.replace("%black_draughts_man%", black_draughts_man);
-          msg = msg.replace("%black_draughts_king%", black_draughts_king);
-          
           event.setMessage(msg);
         }
       }
@@ -127,8 +118,9 @@ public class Main extends JavaPlugin implements Listener {
           
           try { msg = msg.replace("<3", emojiMappings.get("black_heart_suit")); }
           catch (Exception e) { logger.severe("No shortcode defined for \"black_heart_suit\"!"); }
-        }else{
-    	    //gjør ingenting
+        }
+        else {
+    	    //Do nothing
     	  } 
           
         event.setMessage(msg);
@@ -146,12 +138,6 @@ public class Main extends JavaPlugin implements Listener {
         	
         	  //Miscellaneous Symbols
             e.setLine(i,mapEmojis(e.getLine(i)));
-            //Extra
-            if(e.getLine(i).equalsIgnoreCase("%white_draughts_man%")) { e.setLine(i, white_draughts_man); }
-            if(e.getLine(i).equalsIgnoreCase("%white_draughts_king%")) { e.setLine(i, white_draughts_king); }
-            if(e.getLine(i).equalsIgnoreCase("%black_draughts_man%")) { e.setLine(i, black_draughts_man); }
-            if(e.getLine(i).equalsIgnoreCase("%black_draughts_king%")) { e.setLine(i, black_draughts_king); }
-
         	}
         }
      }
@@ -228,13 +214,6 @@ public class Main extends JavaPlugin implements Listener {
                 regex_string = "(?<=\\" + surrounding.trim() + ")[a-zA-Z0-9-_]+(?=\\"+ surrounding.trim() + ")";
                 regex_pattern = Pattern.compile(regex_string);
                 loadShortcodes();
-
-                //Extra
-                white_draughts_man= ChatColor.translateAlternateColorCodes('&', getConfig().getString("white_draughts_man")) + ("\u26C0") + ChatColor.translateAlternateColorCodes('&', getConfig().getString("suffix_white_draughts_man"));
-                white_draughts_king= ChatColor.translateAlternateColorCodes('&', getConfig().getString("white_draughts_king")) + ("\u26C1") + ChatColor.translateAlternateColorCodes('&', getConfig().getString("suffix_white_draughts_king"));
-                black_draughts_man= ChatColor.translateAlternateColorCodes('&', getConfig().getString("black_draughts_man")) + ("\u26C2") + ChatColor.translateAlternateColorCodes('&', getConfig().getString("suffix_black_draughts_man"));
-                black_draughts_king= ChatColor.translateAlternateColorCodes('&', getConfig().getString("black_draughts_king")) + ("\u26C3") + ChatColor.translateAlternateColorCodes('&', getConfig().getString("suffix_black_draughts_king"));
-
                 logger.warning("Some config options do not support being updated through /emoji reload. Restart the server to fully apply all changes.");
                 sender.sendMessage("§eSome config options do not support being updated through /emoji reload. Restart the server to fully apply all changes.");
 
@@ -443,19 +422,6 @@ public class Main extends JavaPlugin implements Listener {
       for (Map.Entry<String, String> entry : emojiMappings.entrySet()) { //https://stackoverflow.com/a/1066607
         lines.add(surrounding + entry.getKey() + surrounding + " = " + entry.getValue() + "\n");
       }
-      */
-
-      //Extra
-      lines.add("%white_draughts_man% = "+ white_draughts_man + "\n");
-      lines.add("%white_draughts_king% = "+ white_draughts_king + "\n");
-      lines.add("%black_draughts_man% = "+ black_draughts_man + "\n");
-      lines.add("%black_draughts_king% = "+ black_draughts_king + "\n");
-
-      /* //Drop this into shortcodes.txt if the above are not to be left simply as Extra
-        white_draughts_man,⛀
-        white_draughts_king,⛁
-        black_draughts_man,⛂
-        black_draughts_king,⛃
       */
 
       List<List<String>> partition = Lists.partition(lines, getConfig().getInt("pagesperpage"));
